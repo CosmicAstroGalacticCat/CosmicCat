@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmicCat's Desktop | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+<div class="desktop-wrapper">
+    <header class="main-header">
+        <h1 class="brand-title">CosmicCat’s Art</h1>
+        <p class="brand-sub">Blender Work & Digital Collection</p>
+        
+        <nav class="filter-nav">
+            <button class="filter-btn active" onclick="filterWork('all')">All</button>
+            <button class="filter-btn" onclick="filterWork('3d')">3D</button>
+            <button class="filter-btn" onclick="filterWork('animation')">Animation</button>
+            <button class="filter-btn" onclick="filterWork('illustration')">Illustration</button>
+            <button class="filter-btn" onclick="filterWork('Character Design')">Character Design</button>
+        </nav>
+    </header>
+
+    <main class="work-grid">
+        <section class="work-item" data-category="3d">
+            <div class="model-box">
+                <model-viewer id="model1" src="3D/Human.glb" ios-src="3D/Human.usdz" ar ar-modes="webxr scene-viewer quick-look" camera-controls autoplay auto-rotate shadow-intensity="1" environment-image="neutral" loading="eager" style="width: 100%; height: 100%;">
+                </model-viewer>
+            </div>
+            <div class="work-info">
+                <h3>สมชาย</h3>
+                <p>สมชายในกายเนื้อ</p>
+                <button class="ar-launch-btn" onclick="triggerAR('model1')">View in AR 🚀</button>
+            </div>
+        </section>
+
+
+        <section class="work-item" data-category="3d">
+            <div class="model-box">
+                <model-viewer id="model2" src="3D/ROOM.glb" ios-src="3D/ROOM.usdz" ar ar-modes="webxr scene-viewer quick-look" camera-controls autoplay auto-rotate shadow-intensity="1" environment-image="neutral" loading="eager" style="width: 100%; height: 100%;">
+                </model-viewer>
+            </div>
+            <div class="work-info">
+                <h3>Moon Room</h3>
+                <p>A stylized isometric room for the Moon Prince. Explore the details in 3D.</p>
+                <button class="ar-launch-btn" onclick="triggerAR('model2')">View in AR 🚀</button>
+            </div>
+        </section>
+
+        <section class="work-item" data-category="3d">
+            <div class="model-box">
+                <model-viewer id="model3" src="3D/Angie.glb" ios-src="3D/Angie.usdz" ar ar-modes="webxr scene-viewer quick-look" camera-controls autoplay auto-rotate shadow-intensity="1" environment-image="neutral" loading="eager" style="width: 100%; height: 100%;">
+                </model-viewer>
+            </div>
+            <div class="work-info">
+                <h3>Angie</h3>
+                <p>An Angel that look like a demon.</p>
+                <button class="ar-launch-btn" onclick="triggerAR('model3')">View in AR 🚀</button>
+            </div>
+        </section>
+
+
+
+
+        <section class="work-item" data-category="animation">
+            <div class="image-box placeholder">
+                <span>Animation Preview (GIF/Video)</span>
+            </div>
+            <div class="work-info">
+                <h3>New Animation Project</h3>
+                <p>Coming soon...</p>
+            </div>
+        </section>
+
+        <section class="work-item" data-category="Character Design">
+            <div class="image-box placeholder">
+                <span>Character Design Image</span>
+            </div>
+            <div class="work-info">
+                <h3>New Character Design</h3>
+                <p>Coming soon...</p>
+            </div>
+        </section>
+
+        <section class="work-item" data-category="illustration">
+            <div class="image-box placeholder">
+                <span>Illustration Image</span>
+            </div>
+            <div class="work-info">
+                <h3>New Illustration</h3>
+                <p>Coming soon...</p>
+            </div>
+        </section>
+
+
+
+
+    </main>
+
+    <footer class="desktop-footer">
+        <p>© 2026 CosmicCat | <a href="https://www.instagram.com/chonoryokushauser/" target="_blank">Instagram</a></p>
+    </footer>
+</div>
+
+<script>
+// ฟังก์ชันสำหรับกรองประเภทงาน
+function filterWork(category) {
+    const items = document.querySelectorAll('.work-item');
+    const buttons = document.querySelectorAll('.filter-btn');
+
+    // เปลี่ยนสถานะปุ่ม
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // ซ่อน/แสดง Card
+    items.forEach(item => {
+        const categories = item.getAttribute('data-category').split(' ');
+        if (category === 'all' || categories.includes(category)) {
+            item.style.display = 'block';
+            setTimeout(() => item.style.opacity = '1', 10);
+        } else {
+            item.style.opacity = '0';
+            setTimeout(() => item.style.display = 'none', 300);
+        }
+    });
+}
+
+// ฟังก์ชันเปิด AR
+function triggerAR(id) {
+    const viewer = document.getElementById(id);
+    if (viewer && viewer.activateAR) {
+        viewer.activateAR();
+    }
+}
+</script>
+
+</body>
+</html>
